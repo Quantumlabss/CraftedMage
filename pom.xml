@@ -6,7 +6,7 @@
 
     <groupId>org.crafted.craftedmage</groupId>
     <artifactId>CraftedMage</artifactId>
-    <version>Dev 1.4.0</version>
+    <version>Dev 1.9.0</version>
     <packaging>jar</packaging>
 
     <name>CraftedMage</name>
@@ -23,8 +23,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>10</source>
+                    <target>10</target>
                 </configuration>
             </plugin>
             <plugin>
