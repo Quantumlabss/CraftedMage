@@ -51,7 +51,7 @@ public void changeMode(PlayerInteractEvent c) {
     @EventHandler
     public void ballFiring(PlayerInteractEvent e) {
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR  e.getAction() != Action.RIGHT_CLICK_AIR && fireMode == true ) {
+        if (e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_AIR && fireMode == true ) {
             Player p = e.getPlayer();
             if (e.getItem() != null) {
                 if (e.getItem().getItemMeta().equals(ItemManager.devWand.getItemMeta())) {
@@ -66,7 +66,7 @@ public void changeMode(PlayerInteractEvent c) {
 
     @EventHandler
     public void Lightning(PlayerInteractEvent l) {
-        if (l.getAction() == Action.LEFT_CLICK_AIR && l.getAction() != Action.RIGHT_CLICK_AIR && lightningMode == true) {
+        if (l.getAction() == Action.LEFT_CLICK_AIR || l.getAction() == Action.LEFT_CLICK_AIR && l.getAction() != Action.RIGHT_CLICK_AIR && lightningMode == true) {
             Player p = l.getPlayer();
             if (l.getItem() != null) {
                 if (l.getItem().getItemMeta().equals(ItemManager.devWand.getItemMeta())) {
