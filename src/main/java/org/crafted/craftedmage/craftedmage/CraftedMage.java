@@ -1,5 +1,6 @@
 package org.crafted.craftedmage.craftedmage;
 
+import Commands.CommandWandClass;
 import events.EventManager;
 import items.magic.ItemManager;
 import items.magic.air.AirWand;
@@ -15,6 +16,7 @@ public final class CraftedMage extends JavaPlugin {
         ItemManager.ItemInit();
         getLogger().info("loaded");
         getServer().getPluginManager().registerEvents(new EventManager(), this);
+        this.getCommand("WandGive").setExecutor(new CommandWandClass());
         getLogger().info("events lowaded");
         getLogger().info("Loading Kumbhak's Items");
         AirWand.init();

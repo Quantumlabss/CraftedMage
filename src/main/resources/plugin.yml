@@ -2,3 +2,8 @@ name: CraftedMage
 version: '${project.version}'
 main: org.crafted.craftedmage.craftedmage.CraftedMage
 api-version: 1.19
+commands:
+  WandGive:
+    description: give wand
+    usage: /<command>
+    permission:

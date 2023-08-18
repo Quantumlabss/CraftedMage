@@ -24,7 +24,7 @@ public class AirWand {
         //lore
         List<String> airLore = new ArrayList<>();
         airLore.add(ChatColor.DARK_AQUA + "The wand of air");
-        airLore.add(ChatColor.DARK_AQUA + "Use this item to acces your full potential");
+        airLore.add(ChatColor.DARK_AQUA + "Use this item to access your full potential");
         airmeta.setLore(airLore);
         //assign enchant and add it hidden
         airmeta.addEnchant(org.bukkit.enchantments.Enchantment.LUCK, 1, false);

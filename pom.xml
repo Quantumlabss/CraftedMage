@@ -6,7 +6,7 @@
 
     <groupId>org.crafted.craftedmage</groupId>
     <artifactId>CraftedMage</artifactId>
-    <version>Dev 1.9.0</version>
+    <version>Dev 1.12.1</version>
     <packaging>jar</packaging>
 
     <name>CraftedMage</name>
@@ -53,6 +53,7 @@
     </build>
 
     <repositories>
+
         <repository>
             <id>papermc-repo</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
@@ -64,6 +65,7 @@
     </repositories>
 
     <dependencies>
+
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
