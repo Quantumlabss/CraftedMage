@@ -3,19 +3,25 @@ package events;
 
 import items.magic.ItemManager;
 
-import items.magic.fire.FireWand;
-import net.md_5.bungee.api.ChatMessageType;
-import org.bukkit.ChatColor;
+import items.magic.MasterWand;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
+import org.crafted.craftedmage.craftedmage.CraftedMage;
+
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.util.Vector;
+
+import io.papermc.paper.event.entity.EntityMoveEvent;
+import items.magic.MasterWand;
 
 import java.awt.*;
 
@@ -24,38 +30,56 @@ public class EventManager implements Listener {
 
 
 
-
-
-
-
     //fireball test
     @EventHandler
     public void ballFiring(PlayerInteractEvent e) {
-
-        if (e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_AIR) {
+        if (e.getAction() == Action.LEFT_CLICK_BLOCK || (e.getAction() == Action.LEFT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_AIR)) {
             Player p = e.getPlayer();
             Location location = p.getEyeLocation();
             Vector direction = location.getDirection();
-            if (e.getItem() != null) {
-
-                if (e.getItem().getItemMeta().equals(FireWand.fireWand.getItemMeta())) {
+            if (e.getItem() != null && e.getItem().getItemMeta() != null) {
+                if (e.getItem().getItemMeta().equals(MasterWand.masterWand.getItemMeta())) {
                     e.setCancelled(true);
-                    Fireball s = e.getPlayer().launchProjectile(Fireball.class);
+                    Fireball s = (Fireball) p.launchProjectile(Fireball.class);
                     s.setIsIncendiary(false);
-                    s.setYield(0);
-                    s.setVisibleByDefault(false);
-                    for (int i = 0; i < 1000; i++) {
-                        Location loc = s.getLocation();
-                        loc.getWorld().spawnParticle(Particle.FLAME, loc.getX(), loc.getY(), loc.getZ() ,0 ,0 ,0 ,0);
+                    s.setYield(0.0F);
 
-
-                        //p.spawnParticle(Particle.FLAME, p.getLocation(), 0, 2, 0, 2);
-
+                    // Add particles when someone shoots from the wand
+                    for (int i = 0; i < 100; i++) {
+                        Location particleLoc = s.getLocation().add(direction.multiply(i));
+                        particleLoc.getWorld().spawnParticle(Particle.FLAME, particleLoc, 1, 0.5, 0.5, 0.5, 0.5);
+                        
                     }
+                    // fireball trail particles
+                    new BukkitRunnable() {
+                        int iterations = 0;
+    
+                        @Override
+                        public void run() {
+                            if (iterations >= 100 || s.isDead()) {
+                                this.cancel();
+                                return;
+                            }
+    
+                            Location particleLoc = s.getLocation().add(direction.clone().multiply(iterations));
+                            particleLoc.getWorld().spawnParticle(Particle.FLAME, particleLoc, 1, 0.2, 0.2, 0.2, 0.2);
+                            iterations++;
+                        }
+                    }.runTaskTimer(CraftedMage.getInstance(), 0, 1);
                 }
             }
-        }
-    }
+                }
+            }
+        
+    
+                
+            
+        
+    
+
+
+    
+    
 
     //@EventHandler
    // public void Lightning(PlayerInteractEvent l) {
@@ -71,6 +95,4 @@ public class EventManager implements Listener {
            // }
        // }
    // }
-
-
-}
+           }
