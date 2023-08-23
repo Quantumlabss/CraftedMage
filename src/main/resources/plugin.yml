@@ -3,7 +3,15 @@ version: '${project.version}'
 main: org.crafted.craftedmage.craftedmage.CraftedMage
 api-version: 1.19
 commands:
-  WandGive:
+  FireWand:
+    description: give wand
+    usage: /<command>
+    permission:
+  AirWand:
+    description: give wand
+    usage: /<command>
+    permission:
+  WaterWand:
     description: give wand
     usage: /<command>
     permission:

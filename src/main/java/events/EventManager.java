@@ -4,6 +4,7 @@ package events;
 import items.magic.ItemManager;
 
 import items.magic.MasterWand;
+import items.magic.fire.FireWand;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -38,7 +39,7 @@ public class EventManager implements Listener {
             Location location = p.getEyeLocation();
             Vector direction = location.getDirection();
             if (e.getItem() != null && e.getItem().getItemMeta() != null) {
-                if (e.getItem().getItemMeta().equals(MasterWand.masterWand.getItemMeta())) {
+                if (e.getItem().getItemMeta().equals(FireWand.fireWand.getItemMeta())) {
                     e.setCancelled(true);
                     Fireball s = (Fireball) p.launchProjectile(Fireball.class);
                     s.setIsIncendiary(false);
