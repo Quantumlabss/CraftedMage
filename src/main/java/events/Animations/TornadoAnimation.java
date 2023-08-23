@@ -15,6 +15,7 @@ public class TornadoAnimation extends BukkitRunnable {
     private int durationTicks;
     private int ticksElapsed;
     private Vector tornadoDirection;
+    private Vector currentDirection;
 
     public TornadoAnimation(Player player, double radius, double height, double strength, int durationTicks, Vector tornadoDirection) {
         this.player = player;
@@ -24,45 +25,53 @@ public class TornadoAnimation extends BukkitRunnable {
         this.durationTicks = durationTicks;
         this.ticksElapsed = 0;
         this.tornadoDirection = tornadoDirection.normalize();
+        this.currentDirection = tornadoDirection;
     }
-
     @Override
     public void run() {
         if (ticksElapsed >= durationTicks) {
             cancel();
             return;
         }
-
+    
         double angle = (2 * Math.PI * ticksElapsed) / durationTicks;
-
-        for (int layer = 1; layer <= 5; layer++) {
-            double x = radius * Math.cos(angle) * (layer / 5.0);
-            double y = (height / durationTicks) * ticksElapsed;
-            double z = radius * Math.sin(angle) * (layer / 5.0);
-
-            Vector offset = new Vector(x, y, z);
-            Vector particleLocation = player.getLocation().toVector().add(offset).add(tornadoDirection);
-
-            Location particleLocationWorld = particleLocation.toLocation(player.getWorld());
-            player.getWorld().spawnParticle(Particle.CLOUD, particleLocationWorld, 10, 0.1, 0.1, 0.1, 0.1);
-        }
-
+        int entityCount = 0;
         for (Entity entity : player.getNearbyEntities(radius, height, radius)) {
             if (entity instanceof Player && entity.equals(player)) {
                 continue;
             }
-
-            double entityAngle = angle * (radius - entity.getLocation().distance(player.getLocation())) / radius;
-            double yForce = (height / durationTicks) * ticksElapsed;
-            double xForce = radius * Math.cos(entityAngle);
-            double zForce = radius * Math.sin(entityAngle);
-
-            Vector forceDirection = new Vector(xForce, yForce, zForce).normalize();
-            double forceMagnitude = strength * (1.0 - ticksElapsed / (double) durationTicks);
-
-            entity.setVelocity(forceDirection.multiply(forceMagnitude));
+            Location entityLocation = entity.getLocation();
+            Vector toEntity = entityLocation.toVector().subtract(player.getLocation().toVector());
+            double entityAngle = tornadoDirection.angle(toEntity.clone().setY(0)); 
+            double entityDistance = toEntity.length();
+    
+            if (entityDistance < radius) {
+                double yForce = (height / durationTicks) * ticksElapsed;
+                double xForce = radius * Math.cos(entityAngle);
+                double zForce = radius * Math.sin(entityAngle);
+                Vector forceDirection = new Vector(xForce, yForce, zForce).normalize();
+                double forceMagnitude = strength * (1.0 - ticksElapsed / (double) durationTicks);
+                entity.setVelocity(forceDirection.multiply(forceMagnitude));
+            }
+            entityCount++;
         }
-
+        int layers = 5; // Amount of layers of the tornado
+        double layerHeight = height / layers;
+        double layerDistance = radius * 1.3; // Tornado distance from player
+    
+        for (int layer = 1; layer <= layers; layer++) {
+            double layerAngle = angle * (layer / (double) layers);
+            double x = layerDistance * Math.cos(layerAngle);
+            double z = layerDistance * Math.sin(layerAngle);
+    
+            for (int particleLayer = 0; particleLayer < 5; particleLayer++) {
+                double y = (layerHeight / durationTicks) * ticksElapsed + layerHeight * (layer - 1);
+                Vector offset = new Vector(x, y, z);
+                Vector particleLocation = player.getLocation().toVector().add(offset).add(tornadoDirection);
+                Location particleLocationWorld = particleLocation.toLocation(player.getWorld());
+                player.getWorld().spawnParticle(Particle.CLOUD, particleLocationWorld, 3, 0.13, 0.13, 0.13, 0.13);
+            }
+        }
         ticksElapsed++;
     }
 }
