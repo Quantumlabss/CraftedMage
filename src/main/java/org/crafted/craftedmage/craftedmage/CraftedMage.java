@@ -1,25 +1,31 @@
 package org.crafted.craftedmage.craftedmage;
 
 import Commands.AirWandClass;
+import items.magic.ItemManager;
+import items.magic.ManaManager;
 import Commands.CommandWandClass;
 import Commands.WaterWandClass;
 import events.EventManager;
 import events.EventManagerAir;
 import events.EventManagerWater;
-import items.magic.ItemManager;
 import items.magic.air.AirWand;
 import items.magic.fire.FireWand;
 import items.magic.water.WaterWand;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import items.magic.MasterWand;
 
 public final class CraftedMage extends JavaPlugin {
     private static CraftedMage instance;
+    private ManaManager manaManager;
 
 
     @Override
     public void onEnable() {
         instance = this;
+        manaManager = new ManaManager(this); // Pass the JavaPlugin instance
 
         // Plugin startup logic
         ItemManager.ItemInit();
@@ -30,13 +36,12 @@ public final class CraftedMage extends JavaPlugin {
         this.getCommand("FireWand").setExecutor(new CommandWandClass());
         this.getCommand("AirWand").setExecutor(new AirWandClass());
         this.getCommand("WaterWand").setExecutor(new WaterWandClass());
-        getLogger().info("events lowaded");
+        getLogger().info("events loaded");
         getLogger().info("Loading Kumbhak's Items");
         AirWand.init();
         FireWand.init();
         WaterWand.init();
         MasterWand.init();
-
 
     }
 
@@ -45,7 +50,11 @@ public final class CraftedMage extends JavaPlugin {
         // Plugin shutdown logic
         getLogger().info("failed");
     }
+
     public static CraftedMage getInstance() {
         return instance;
+    }
+    public ManaManager getManaManager() {
+        return manaManager;
     }
 }
