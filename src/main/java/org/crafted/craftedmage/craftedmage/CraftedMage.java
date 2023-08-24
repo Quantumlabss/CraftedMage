@@ -3,9 +3,9 @@ package org.crafted.craftedmage.craftedmage;
 import Commands.AirWandClass;
 import Commands.CommandWandClass;
 import Commands.WaterWandClass;
-import Commands.AirWandClass;
 import events.EventManager;
 import events.EventManagerAir;
+import events.EventManagerWater;
 import items.magic.ItemManager;
 import items.magic.air.AirWand;
 import items.magic.fire.FireWand;
@@ -25,6 +25,7 @@ public final class CraftedMage extends JavaPlugin {
         ItemManager.ItemInit();
         getLogger().info("loaded");
         getServer().getPluginManager().registerEvents(new EventManager(), this);
+        getServer().getPluginManager().registerEvents(new EventManagerWater(), this);
         getServer().getPluginManager().registerEvents(new EventManagerAir(), this);
         this.getCommand("FireWand").setExecutor(new CommandWandClass());
         this.getCommand("AirWand").setExecutor(new AirWandClass());
