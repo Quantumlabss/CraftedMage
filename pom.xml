@@ -6,7 +6,7 @@
 
     <groupId>org.crafted.craftedmage</groupId>
     <artifactId>CraftedMage</artifactId>
-    <version>Dev 1.12.1</version>
+    <version>Dev 1.12.3</version>
     <packaging>jar</packaging>
 
     <name>CraftedMage</name>

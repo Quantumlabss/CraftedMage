@@ -24,7 +24,7 @@ public class FireWand {
         //lore
         List<String> fireLore = new ArrayList<>();
         fireLore.add(ChatColor.DARK_RED + "The wand of fire");
-        fireLore.add(ChatColor.DARK_RED + "Use this item to acces your full potential");
+        fireLore.add(ChatColor.DARK_RED + "For Testing");
         firemeta.setLore(fireLore);
         
         firemeta.addEnchant(Enchantment.LUCK, 1, false);

@@ -1,5 +1,6 @@
 package events;
 
+import items.magic.MasterWand;
 import items.magic.water.WaterWand;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -25,8 +26,8 @@ public class EventManagerWater implements Listener {
         Player player = event.getPlayer();
         Action action = event.getAction();
 
-        if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
-            if (player.getInventory().getItemInMainHand().isSimilar(WaterWand.waterWand)) {
+        if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK && player.hasPermission("element.water")) {
+            if (player.getInventory().getItemInMainHand().isSimilar(MasterWand.masterWand)) {
                 if (canCastSpell(player)) {
                     int manaCost = 20;
                     if (CraftedMage.getInstance().getManaManager().consumeMana(player, manaCost)) {

@@ -1,6 +1,7 @@
 package org.crafted.craftedmage.craftedmage;
 
 import Commands.AirWandClass;
+import Commands.ElementCommandClass;
 import items.magic.ItemManager;
 import items.magic.ManaManager;
 import Commands.CommandWandClass;
@@ -14,6 +15,7 @@ import items.magic.water.WaterWand;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 import items.magic.MasterWand;
 
@@ -36,6 +38,7 @@ public final class CraftedMage extends JavaPlugin {
         this.getCommand("FireWand").setExecutor(new CommandWandClass());
         this.getCommand("AirWand").setExecutor(new AirWandClass());
         this.getCommand("WaterWand").setExecutor(new WaterWandClass());
+        this.getCommand("Element").setExecutor(new ElementCommandClass());
         getLogger().info("events loaded");
         getLogger().info("Loading Kumbhak's Items");
         AirWand.init();
@@ -48,6 +51,8 @@ public final class CraftedMage extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+
+
         getLogger().info("failed");
     }
 

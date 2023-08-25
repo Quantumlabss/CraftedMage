@@ -1,12 +1,12 @@
 package Commands;
 
+import items.magic.MasterWand;
 import items.magic.fire.FireWand;
-import org.bukkit.ChatColor;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import items.magic.ItemManager;
 
 public class CommandWandClass implements CommandExecutor {
 
@@ -15,9 +15,8 @@ public class CommandWandClass implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             // Here we need to give items to our player
-            FireWand.fireWand.setAmount(1);
-            player.getInventory().addItem(FireWand.fireWand);
-            player.chat(ChatColor.RED + "Fire Wand Testing Wand Recieved");
+            MasterWand.masterWand.setAmount(1);
+            player.getInventory().addItem(MasterWand.masterWand);
         }
 
         // If the player (or console) uses our command correct, we can return true
