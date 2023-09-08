@@ -30,12 +30,14 @@ public class EventManager implements Listener {
 private Map<Player, Long> wandCooldowns = new HashMap<>();
 @EventHandler
 public void ballFiring(PlayerInteractEvent e) {
-    if (e.getAction() == Action.LEFT_CLICK_BLOCK || (e.getAction() == Action.LEFT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_AIR)) {
-        Player player = e.getPlayer();
+    Player player = e.getPlayer();
+    if (e.getAction() == Action.LEFT_CLICK_BLOCK || (e.getAction() == Action.LEFT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_AIR) && player.hasPermission("element.fire")) {
+
+
         Location location = player.getEyeLocation();
         Vector direction = location.getDirection();
         if (e.getItem() != null && e.getItem().getItemMeta() != null) {
-            if (e.getItem().getItemMeta().equals(FireWand.fireWand.getItemMeta())) {
+            if (e.getItem().getItemMeta().equals(MasterWand.masterWand.getItemMeta())) {
                 e.setCancelled(true);
 
                 long currentTime = System.currentTimeMillis();

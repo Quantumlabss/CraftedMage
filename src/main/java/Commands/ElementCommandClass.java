@@ -23,13 +23,19 @@ public class ElementCommandClass implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            Plugin plugin = CraftedMage.getPlugin(CraftedMage.class);
-            Player player = (Player) sender;
-            // give player permission to use the water powers
-            Scoreboard sb = Bukkit.getScoreboardManager().getMainScoreboard();
-            Team blueteam = sb.registerNewTeam("BlueNameTeam");
-            blueteam.setPrefix(ChatColor.DARK_BLUE.toString());
-            blueteam.addPlayer(player);
+            CraftedMage plugin = CraftedMage.getInstance();
+            HashMap<UUID, PermissionAttachment> perms = new HashMap<UUID, PermissionAttachment>();
+            Player player = ((Player) sender).getPlayer();
+
+            PermissionAttachment attachment = player.addAttachment(plugin);
+            perms.put(player.getUniqueId(), attachment);
+            PermissionAttachment pperms = perms.get(player.getUniqueId());
+            pperms.setPermission("element.water", true);
+
+
+
+
+
 
 
         }
@@ -37,4 +43,6 @@ public class ElementCommandClass implements CommandExecutor {
         // If the player (or console) uses our command correct, we can return true
         return true;
     }
+
+
 }

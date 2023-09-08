@@ -46,6 +46,10 @@ public final class CraftedMage extends JavaPlugin {
         WaterWand.init();
         MasterWand.init();
 
+
+
+        //randomly give player element
+
     }
 
     @Override
