@@ -1,23 +1,21 @@
-package org.crafted.craftedmage.craftedmage;
+package org.crafted.craftedmage;
 
-import Commands.AirWandClass;
-import Commands.ElementCommandClass;
-import items.magic.ItemManager;
-import items.magic.ManaManager;
-import Commands.CommandWandClass;
-import Commands.WaterWandClass;
-import events.EventManager;
-import events.EventManagerAir;
-import events.EventManagerWater;
-import items.magic.air.AirWand;
-import items.magic.fire.FireWand;
-import items.magic.water.WaterWand;
+import org.crafted.craftedmage.Commands.AirWandClass;
+import org.crafted.craftedmage.Commands.CommandWandClass;
+import org.crafted.craftedmage.Commands.ElementCommandClass;
+import org.crafted.craftedmage.Commands.WaterWandClass;
+import org.crafted.craftedmage.events.PlayerJoinManager;
+import org.crafted.craftedmage.magic.ItemManager;
+import org.crafted.craftedmage.magic.ManaManager;
+import org.crafted.craftedmage.events.EventManager;
+import org.crafted.craftedmage.events.EventManagerAir;
+import org.crafted.craftedmage.events.EventManagerWater;
+import org.crafted.craftedmage.magic.air.AirWand;
+import org.crafted.craftedmage.magic.fire.FireWand;
+import org.crafted.craftedmage.magic.water.WaterWand;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
-import items.magic.MasterWand;
+import org.crafted.craftedmage.magic.MasterWand;
 
 public final class CraftedMage extends JavaPlugin {
     private static CraftedMage instance;
@@ -32,6 +30,7 @@ public final class CraftedMage extends JavaPlugin {
         // Plugin startup logic
         ItemManager.ItemInit();
         getLogger().info("loaded");
+        getServer().getPluginManager().registerEvents(new PlayerJoinManager(), this);
         getServer().getPluginManager().registerEvents(new EventManager(), this);
         getServer().getPluginManager().registerEvents(new EventManagerWater(), this);
         getServer().getPluginManager().registerEvents(new EventManagerAir(), this);
@@ -39,7 +38,7 @@ public final class CraftedMage extends JavaPlugin {
         this.getCommand("AirWand").setExecutor(new AirWandClass());
         this.getCommand("WaterWand").setExecutor(new WaterWandClass());
         this.getCommand("Element").setExecutor(new ElementCommandClass());
-        getLogger().info("events loaded");
+        getLogger().info("org.crafted.craftedmage.craftedmage.events loaded");
         getLogger().info("Loading Kumbhak's Items");
         AirWand.init();
         FireWand.init();

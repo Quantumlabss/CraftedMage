@@ -1,4 +1,4 @@
-package items.magic.water;
+package org.crafted.craftedmage.magic.water;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

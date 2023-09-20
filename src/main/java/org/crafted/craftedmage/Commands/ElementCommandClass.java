@@ -1,18 +1,11 @@
-package Commands;
+package org.crafted.craftedmage.Commands;
 
-import items.magic.MasterWand;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
-import org.crafted.craftedmage.craftedmage.CraftedMage;
+import org.crafted.craftedmage.CraftedMage;
 
 import java.util.HashMap;
 import java.util.UUID;

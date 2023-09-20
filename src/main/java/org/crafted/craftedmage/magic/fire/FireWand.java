@@ -1,4 +1,4 @@
-package items.magic.fire;
+package org.crafted.craftedmage.magic.fire;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

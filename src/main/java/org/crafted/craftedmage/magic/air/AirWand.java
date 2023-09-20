@@ -1,4 +1,4 @@
-package items.magic.air;
+package org.crafted.craftedmage.magic.air;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

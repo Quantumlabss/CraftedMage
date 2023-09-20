@@ -3,25 +3,25 @@ version: '${project.version}'
 main: org.crafted.craftedmage.craftedmage.CraftedMage
 api-version: 1.19
 permissions:
-  #element.*:
-   # description: gives player access to specific element
-    #children:
-     # element.water: false
-      #element.fire: false
-      #element.air: false
- #     element.earth: false
-  #  element.water:
-   #   description: access to water element
-    #  default: false
-   # element.fire:
-    #  description: access to fire element
-     # default: false
-  #  element.air:
-   #   description: access to air element
-    #  default: false
-  #  element.earth:
-   #   description: access to earth element
-    #  default: false
+  element.*:
+    description: gives player access to specific element
+    children:
+      element.water: false
+      element.fire: false
+      element.air: false
+      element.earth: false
+    element.water:
+      description: access to water element
+      default: false
+    element.fire:
+      description: access to fire element
+      default: false
+    element.air:
+      description: access to air element
+      default: false
+    element.earth:
+      description: access to earth element
+      default: false
 
 commands:
   FireWand:
