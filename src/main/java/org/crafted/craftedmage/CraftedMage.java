@@ -1,6 +1,7 @@
 package org.crafted.craftedmage;
 
 import org.crafted.craftedmage.Commands.AirWandClass;
+import org.crafted.craftedmage.Commands.EarthWandClass;
 import org.crafted.craftedmage.Commands.CommandWandClass;
 import org.crafted.craftedmage.Commands.ElementCommandClass;
 import org.crafted.craftedmage.Commands.WaterWandClass;
@@ -8,8 +9,10 @@ import org.crafted.craftedmage.magic.ItemManager;
 import org.crafted.craftedmage.magic.ManaManager;
 import org.crafted.craftedmage.events.EventManager;
 import org.crafted.craftedmage.events.EventManagerAir;
+import org.crafted.craftedmage.events.EventManagerEarth;
 import org.crafted.craftedmage.events.EventManagerWater;
 import org.crafted.craftedmage.magic.air.AirWand;
+import org.crafted.craftedmage.magic.earth.EarthWand;
 import org.crafted.craftedmage.magic.fire.FireWand;
 import org.crafted.craftedmage.magic.water.WaterWand;
 
@@ -39,15 +42,18 @@ public final class CraftedMage extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventManager(), this);
         getServer().getPluginManager().registerEvents(new EventManagerWater(), this);
         getServer().getPluginManager().registerEvents(new EventManagerAir(), this);
+        getServer().getPluginManager().registerEvents(new EventManagerEarth(), this);
         this.getCommand("FireWand").setExecutor(new CommandWandClass());
         this.getCommand("AirWand").setExecutor(new AirWandClass());
         this.getCommand("WaterWand").setExecutor(new WaterWandClass());
+        this.getCommand("EarthWand").setExecutor(new EarthWandClass());
         this.getCommand("Element").setExecutor(new ElementCommandClass());
         getLogger().info("events loaded");
         getLogger().info("Loading Kumbhak's Items");
         AirWand.init();
         FireWand.init();
         WaterWand.init();
+        EarthWand.init();
         MasterWand.init();
 
 

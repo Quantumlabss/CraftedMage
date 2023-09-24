@@ -3,6 +3,8 @@ package org.crafted.craftedmage.events;
 
 import org.crafted.craftedmage.CraftedMage;
 import org.crafted.craftedmage.magic.MasterWand;
+import org.crafted.craftedmage.magic.earth.EarthWand;
+import org.crafted.craftedmage.magic.fire.FireWand;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Fireball;
@@ -24,6 +26,7 @@ private Map<Player, Long> wandCooldowns = new HashMap<>();
 public void ballFiring(PlayerInteractEvent e) {
     Player player = e.getPlayer();
     if (e.getAction() == Action.LEFT_CLICK_BLOCK || (e.getAction() == Action.LEFT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_AIR) && player.hasPermission("element.fire")) {
+        if (player.getInventory().getItemInMainHand().isSimilar(FireWand.fireWand)) {
 
 
         Location location = player.getEyeLocation();
@@ -78,6 +81,7 @@ public void ballFiring(PlayerInteractEvent e) {
             }
                 }
             }
+        }
         
     
                 
